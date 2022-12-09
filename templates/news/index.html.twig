@@ -1,0 +1,46 @@
+{% extends "layout/base.html.twig" %}
+
+{% block body %}
+
+<div class="container"><br><br>
+
+    <h1>Liste des Articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Nom de l'image</th>
+                <th>Creer le :</th>
+                <th>Modifier le :</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td>{{ news.id }}</td>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description | slice(0,100) }}</td>
+                <td>{{ news.imageName }}</td>
+                <td>{{ news.createdAt ? news.createdAt|date('d-m-Y |H:i:s') : '' }}</td>
+                <td>{{ news.updatedAt ? news.updatedAt|date('d-m-Y |H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_news_show', {'id': news.id}) }}">Afficher</a>
+                    <a href="{{ path('app_news_edit', {'id': news.id}) }}">editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_news_new') }}">Creation d'un nouvel article</a>
+
+    </div><br><br>
+{% endblock %}

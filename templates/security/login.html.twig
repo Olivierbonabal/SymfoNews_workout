@@ -1,0 +1,52 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}
+
+
+	<div class="login-form">
+		<form method="post">
+
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
+			{% if app.user %}
+				<div class="mb-3">
+					Vous êtes identifier comme étant |
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Deconnexion</a>
+				</div>
+			{% endif %}
+
+			<div class="text-center">
+			<h1 class="h3 my-3 font-weight-normal">S'identifier</h1>
+			</div>
+			
+			<label for="inputEmail">Email</label>
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+			<label for="inputPassword">Mot de Passe</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<div class="checkbox my-3">
+				<label>
+					<input type="checkbox" name="_remember_me">Se souvenir de moi
+				</label>
+				<a style="margin-left: 38px" href="{{ path('app_forgot_password_request') }}">J'ai oublié mon Mot de Passe</a>
+			</div>
+
+			<button class="btn btn-lg btn-primary btn-block my-3" type="submit">
+				Se Connecter
+			</button>
+
+		</form>
+	</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

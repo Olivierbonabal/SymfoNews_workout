@@ -1,0 +1,18 @@
+{% extends "layout/base.html.twig" %}
+
+{% block title %}Edition d'un article
+{% endblock %}
+
+{% block body %}
+
+	<div class="container"><br><br>
+		<h1>Editer un article</h1>
+
+		{{ include('news/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+		<a href="{{ path('app_news_index') }}">Revenir à la liste</a>
+
+		{{ include('news/_delete_form.html.twig') }}
+	</div><br><br>
+
+{% endblock %}

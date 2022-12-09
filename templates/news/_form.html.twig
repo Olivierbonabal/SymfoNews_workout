@@ -1,0 +1,15 @@
+
+{{ form_start(form) }}
+
+<label>Titre de l'article</label>
+    {{ form_widget(form.title, {'attr':{'class':'form form-control'}}) }}
+
+    {{ form_row(form.description, {'attr':{'class':'form form-control'}}) }}
+
+<label>Image à importer</label>
+    {{ form_widget(form.imageFile, {'attr':{'class':'form form-control'}}) }}
+
+    <button class="btn btn-primary my-3">{{ button_label|default('Sauvegarder') }}</button>
+
+{{ form_end(form) }}
+

@@ -1,0 +1,62 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<h1>Page d'accueil</h1>
+
+	<div class="site-section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-12">
+					<h2>Articles récents</h2>
+				</div>
+			</div>
+
+			<div class="row">
+
+				{% for _news in news  %}
+					<div class="col-lg-4 mb-4">
+						<div class="entry2">
+
+							<a href="single.html">
+								<img class="img-fluid rounded" src="{{ vich_uploader_asset(_news, 'imageFile') }}">
+							</a>
+
+							<div class="excerpt">
+								<span class="post-category text-white bg-secondary mb-3">Techno</span>
+
+								<h2>
+									<a href="single.html">{{ _news.title }}</a>
+								</h2>
+
+								<div class="post-meta align-items-center text-left clearfix">
+									<figure class="author-figure mb-0 mr-3 float-left">
+										<img src="../../public/assets/images/Me.png" alt="Image" class="img-fluid">
+									</figure>
+
+									<span class="d-inline-block mt-1">écrit par
+										<a href="#">Olivier Bonabal</a>
+									</span>
+
+									<span>{{ _news.createdAt|ago }}</span>
+								</div>
+
+								<p>{{ _news.description | slice(0,100) }}...</p>
+
+								<p>
+									<a href="#">En lire un peu +</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}
+

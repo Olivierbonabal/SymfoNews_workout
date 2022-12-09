@@ -1,0 +1,21 @@
+body {
+    background: gainsboro;
+}
+
+.login-form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+}
+
+.register-form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+}
+
+.vich-image img {
+    max-width: 300px;
+}

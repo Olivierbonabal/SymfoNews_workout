@@ -1,0 +1,13 @@
+{% extends "layout/base.html.twig" %}
+
+{% block body %}
+
+	<div class="container"><br><br>
+		<h1>Creation d'un nouvel article</h1>
+
+		{{ include('news/_form.html.twig') }}
+
+		<a href="{{ path('app_news_index') }}">Retour à la liste des articles</a>
+	</div><br><br>
+
+{% endblock %}
