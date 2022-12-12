@@ -33,6 +33,7 @@ class NewsController extends AbstractController
             $news->setCreatedAt(new \DateTime);
             $newsRepository->save($news, true);
 
+            $this->addFlash('info', "Votre article vient d'être créer !");
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -61,6 +62,7 @@ class NewsController extends AbstractController
             $news->setUpdatedAt(new \DateTime);
             $newsRepository->save($news, true);
 
+            $this->addFlash('success', "Votre article vient d'être modifié");
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -77,6 +79,7 @@ class NewsController extends AbstractController
             $newsRepository->remove($news, true);
         }
 
+        $this->addFlash('danger', "Votre article a été supprimer !");
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
     }
 }

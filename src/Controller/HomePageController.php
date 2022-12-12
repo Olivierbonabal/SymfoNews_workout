@@ -16,4 +16,14 @@ class HomePageController extends AbstractController
             'news' => $newsRepository->findAll()
         ]);
     }
+
+    #[Route('/news/{id<[0-9]+>}', name: 'app_new_show')]
+    public function newsShow($id, NewsRepository $newsRepository): Response 
+    {
+        $newsId = $newsRepository->find($id);
+        return $this->render('home_page/news_single.html.twig', [
+            'single_news' => $newsRepository->find($newsId)
+        ]);
+    }
+
 }
