@@ -1,0 +1,14 @@
+{% extends "layout/base.html.twig" %}
+
+{% block title %}Creation dune nouvelle categorie{% endblock %}
+
+{% block body %}
+
+<div class="container my-3">
+    <h1>Creer sa categorie</h1>
+
+    {{ include('category/_form.html.twig') }}
+
+    <a href="{{ path('app_category_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

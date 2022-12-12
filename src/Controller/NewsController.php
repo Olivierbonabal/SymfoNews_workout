@@ -24,12 +24,17 @@ class NewsController extends AbstractController
     #[Route('/new', name: 'app_news_new', methods: ['GET', 'POST'])]
     public function new(Request $request, NewsRepository $newsRepository): Response
     {
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $news = new News();
         $form = $this->createForm(NewsType::class, $news);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $news->setAuthor($this->getUser());
             $news->setCreatedAt(new \DateTime);
             $newsRepository->save($news, true);
 
