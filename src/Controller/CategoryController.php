@@ -4,20 +4,28 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Service\NavCategory;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
+    private $navCategory;
+    public function __construct(NavCategory $navCategory)
+    {
+        $this->navCategory = $navCategory;
+    }
+    
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -38,6 +46,7 @@ class CategoryController extends AbstractController
         return $this->renderForm('category/new.html.twig', [
             'category' => $category,
             'form' => $form,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -46,6 +55,7 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -65,6 +75,7 @@ class CategoryController extends AbstractController
         return $this->renderForm('category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 

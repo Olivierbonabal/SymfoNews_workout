@@ -4,20 +4,28 @@ namespace App\Controller;
 
 use App\Entity\News;
 use App\Form\NewsType;
+use App\Service\NavCategory;
 use App\Repository\NewsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/news')]
 class NewsController extends AbstractController
 {
+    private $navCategory;
+    public function __construct(NavCategory $navCategory)
+    {
+        $this->navCategory = $navCategory;
+    }
+
     #[Route('/', name: 'app_news_index', methods: ['GET'])]
     public function index(NewsRepository $newsRepository): Response
     {
         return $this->render('news/index.html.twig', [
             'news' => $newsRepository->findAll(),
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -46,6 +54,7 @@ class NewsController extends AbstractController
         return $this->renderForm('news/new.html.twig', [
             'news' => $news,
             'form' => $form,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -54,6 +63,7 @@ class NewsController extends AbstractController
     {
         return $this->render('news/show.html.twig', [
             'news' => $news,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -75,6 +85,7 @@ class NewsController extends AbstractController
         return $this->renderForm('news/edit.html.twig', [
             'news' => $news,
             'form' => $form,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
